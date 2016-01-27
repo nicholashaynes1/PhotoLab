@@ -132,6 +132,28 @@ public class Picture extends SimplePicture
   }
   
   
+  
+  public void keepOnlyBlue()
+  {
+	  zeroRed();
+	  zeroGreen();
+  }
+  
+  public void keepOnlyRed()
+  {
+	  zeroGreen();
+	  zeroBlue();
+  }
+  
+  public void keepOnlyGreen()
+  {
+	  zeroBlue();
+	  zeroRed();
+  }
+  
+  
+  
+  
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
     * from left to right */
@@ -151,6 +173,30 @@ public class Picture extends SimplePicture
       }
     } 
   }
+  
+  
+  
+  
+  
+  public void mirrorVerticalRight()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel RightPixel = null;
+    Pixel leftPixel = null;
+    int width = pixels[0].length;
+    for (int row = 0; row < pixels.length; row++)
+    {
+      for (int col = pixels[0].length - 1; col > width/2; col--)
+      {
+        RightPixel = pixels[row][col];
+        leftPixel = pixels[row][(width/2) - (col - width/2) ];
+        leftPixel.setColor(RightPixel.getColor());
+      }
+    } 
+  }
+  
+  
+  
   
   /** Mirror just part of a picture of a temple */
   public void mirrorTemple()
@@ -260,16 +306,9 @@ public class Picture extends SimplePicture
 	
     Picture beach = new Picture("beach.jpg");
     beach.explore();
-    beach.zeroBlue();
+    beach.mirrorVerticalRight();
     beach.explore();
-    beach.createCollage();
-    beach.explore();
-    beach.mirrorVertical();
-    beach.explore();
-    beach.mirrorTemple();
-    beach.explore();
-    beach.zeroGreen();
-    beach.explore();
+    
   }
   
 } // this } is the end of class Picture, put all new methods before this
