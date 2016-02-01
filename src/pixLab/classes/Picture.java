@@ -311,6 +311,50 @@ public class Picture extends SimplePicture
   
   }
   
+  public void copyPicture()
+  {
+	    Picture flower1 = new Picture("robot.jpg");
+	    this.copy(flower1,0,0);
+	    this.copy(flower1,200,0);
+	   
+  }
+ 
+  
+  
+  public void fixUnderWater()
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  for( int row = 0; row < pixels.length; row ++)
+	  {
+		  for(int col = 0; col < pixels[0].length; col ++)
+		  {
+			  Pixel currentPixel = pixels[row][col];
+			  int currentBlue = currentPixel.getBlue();
+			  int currentGreen = currentPixel.getGreen();
+			  currentPixel.setGreen(currentGreen - 55);
+			  currentPixel.setBlue(currentBlue - 35);  
+		  }
+	  }
+  }
+  
+  public void negate()
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	    for (Pixel[] rowArray : pixels)
+	    {
+	      for (Pixel pixelObj : rowArray)
+	      {
+	        int newRed = pixelObj.getGreen();
+	        int newBlue = pixelObj.getRed();
+	        int newGreen = pixelObj.getBlue();
+	        pixelObj.setRed(newRed);
+	        pixelObj.setGreen(newGreen);
+	        pixelObj.setBlue(newBlue);
+	      }
+	    }
+			  
+  }
+  
   
   public void mirrorHorizontalBottomToTop()
   {
@@ -417,8 +461,7 @@ public class Picture extends SimplePicture
 	
     Picture beach = new Picture("seagull.jpg");
     beach.explore();
-//    beach.grayScale();
-    beach.mirrorGull();
+    beach.copyPicture();
     beach.explore();
     
   }
